@@ -21,11 +21,18 @@ infotext = Array.new
         infotext.push("#{str[index]} #{item.inner_html.strip.gsub('<span class="terminal">', '').gsub(/(<[^>]*>)|\n|\t/s) {" "}}")
     end
   end
-  puts doc.at_css(".img.img-responsive.img-roundedd.grayscale-no-more")["src"]
+  image = doc.at_css(".img.img-responsive.img-roundedd.grayscale-no-more")["src"]
+  if image.chars.take(2).join == "//"
+    uri = "https:#{image}"
+  elsif image.chars.take(2).join == "/i"
+    uri = "https://www.carjam.co.nz#{image}"
+  else
+    uri = image
+  end
   event.channel.send_embed do |e|
     e.title = "CarJam Information for #{plate}"
     e.url = url+plate
-    e.image = Discordrb::Webhooks::EmbedImage.new(url: doc.at_css(".img.img-responsive.img-roundedd.grayscale-no-more")["src"])
+    e.image = Discordrb::Webhooks::EmbedImage.new(url: uri)
     e.description = infotext.join("\n")
     e.color = '0000ff'
   end
