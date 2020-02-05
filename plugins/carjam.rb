@@ -29,6 +29,11 @@ infotext = Array.new
   else
     uri = image
   end
+  if doc.at_css(".if-reported_stolen_location").to_s["Reported 1970-Jan-01"]
+    infotext.push("Stolen: No")
+  else
+    infotext.push("Stolen: ***YES***")
+  end
   event.channel.send_embed do |e|
     e.title = "CarJam Information for #{plate}"
     e.url = url+plate
