@@ -17,7 +17,7 @@ infotext = Array.new
   if open(url+plate).read["Plate or VIN"]
     event.channel.send_embed do |e|
       e.title = "#{plate.upcase} is invalid"
-      e.description = "#{plate.upcase} is either invalid, or has never been registered.\nValid plates are up to 6 characters long, VINs are 17"
+      e.description = "#{plate.upcase} is either invalid, or has never been registered.\nValid plates are up to 6 characters long, VINs are 17 characters long"
       e.color = 'ff0000'
     end
   else

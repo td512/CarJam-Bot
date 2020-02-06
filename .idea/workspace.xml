@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b97831a-d2ee-4bdc-bcf1-7389da624296" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot.rb" beforeDir="false" afterPath="$PROJECT_DIR$/bot.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/carjam.rb" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/carjam.rb" afterDir="false" />
     </list>
@@ -35,7 +34,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580938041879</updated>
-      <workItem from="1580938044471" duration="6121000" />
+      <workItem from="1580938044471" duration="6186000" />
     </task>
     <servers />
   </component>
