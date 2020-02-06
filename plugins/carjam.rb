@@ -14,7 +14,7 @@ infotext = Array.new
   sleep 1
   open(url+plate).read
   sleep 1
-  if open(url+plate).read["Plate or VIN"]
+  if open(url+plate).read["Vehicle Facts"]
     event.channel.send_embed do |e|
       e.title = "#{plate.upcase} is invalid"
       e.description = "#{plate.upcase} is either invalid, or has never been registered.\nValid plates are up to 6 characters long, VINs are 17 characters long"
