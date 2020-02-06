@@ -21,7 +21,7 @@ infotext = Array.new
         infotext.push("#{str[index]} #{item.inner_html.strip.gsub('<span class="terminal">', '').gsub(/(<[^>]*>)|\n|\t/s) {" "}}")
     end
   end
-  image = doc.at_css(".img.img-responsive.img-roundedd.grayscale-no-more")["src"]
+  image = doc.at_css(".img.img-responsive.img-roundedd")["src"]
   if image.chars.take(2).join == "//"
     uri = "https:#{image}"
   elsif image.chars.take(2).join == "/i"
@@ -35,7 +35,7 @@ infotext = Array.new
     infotext.push("Stolen: ***YES***")
   end
   event.channel.send_embed do |e|
-    e.title = "CarJam Information for #{plate}"
+    e.title = "CarJam Information for #{plate.upcase}"
     e.url = url+plate
     e.image = Discordrb::Webhooks::EmbedImage.new(url: uri)
     e.description = infotext.join("\n")
