@@ -44,7 +44,7 @@ infotext = Array.new
     event.channel.send_embed do |e|
       e.title = "CarJam Information for #{plate.upcase}"
       e.url = url+plate
-      e.image = Discordrb::Webhooks::EmbedImage.new(url: uri)
+      e.image = Discordrb::Webhooks::EmbedImage.new(url: uri.gsub(' ', '%20'))
       e.description = infotext.join("\n")
       e.color = '0000ff'
     end
