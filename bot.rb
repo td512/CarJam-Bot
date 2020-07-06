@@ -15,6 +15,7 @@ end
 def debug
   return colorize("[DEBUG] ", "blue")
 end
+Discordrb::LOGGER.mode = :silent
 # Insert your Client ID and token here
 @bot = Discordrb::Commands::CommandBot.new token: '', client_id: 000000000000000000, prefix: '!'
 
