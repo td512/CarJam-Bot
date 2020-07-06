@@ -1,5 +1,4 @@
-# ctBot Data Miner
-#
+$VERBOSE=nil
 # Discord Ruby Bindings
 @start_time = Time.now
 require 'discordrb'
