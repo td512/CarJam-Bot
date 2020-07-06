@@ -5,7 +5,8 @@ attributes = %w(year_of_manufacture make model submodel main_colour body_style e
 str = %w(Year: Make: Model: Submodel: Colour: Body\ Style: Engine\ Serial: CC\ Rating: Fuel\ Type:)
 infotext = Array.new
 
-@bot.command(:carjam, help_available: false, chain_usable: false) do |event, text|
+@bot.command(:carjam, help_available: false, chain_usable: false) do |event, *text|
+  text = text.join('').upcase
   plate = text
   puts "#{info}CarJam Query for plate #{text}"
   open(url+plate).read
