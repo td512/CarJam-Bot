@@ -1,11 +1,12 @@
 require 'nokogiri'
 require 'open-uri'
 url = "https://www.carjam.co.nz/car/?plate="
-attributes = %w(year_of_manufacture make model submodel main_colour body_style engine_number cc_rating fuel_type)
-str = %w(Year: Make: Model: Submodel: Colour: Body\ Style: Engine\ Serial: CC\ Rating: Fuel\ Type:)
+attributes = %w(Year: Make: Model: Submodel: Colour: Body\ Style: Engine\ Serial: CC\ Rating: Fuel\ Type:)
+key_array = Array.new
+value_array = Array.new
 infotext = Array.new
 
-@bot.command(:carjam, help_available: false, chain_usable: false) do |event, *text|
+@bot.command(:carjam, help_available: false, chain_usable: true) do |event, *text|
   text = text.join('').upcase
   plate = text
   puts "#{info}CarJam Query for plate #{text}"
@@ -23,12 +24,17 @@ infotext = Array.new
     end
   else
     doc = Nokogiri::HTML(open(url+plate))
+    key_array.clear
+    value_array.clear
     infotext.clear
-    attributes.each_with_index do |attrib, index|
-      doc.css("[data-key=#{attrib}] + .value").each do |item|
-        infotext.push("#{str[index]} #{item.inner_html.strip.gsub('<span class="terminal">', '').gsub(/(<[^>]*>)|\n|\t/s) {" "}}")
-      end
+
+    doc.css("span.key").each do |item|
+      key_array.push(item.inner_html.strip.gsub('<span class="terminal">', '').gsub(/(<[^>]*>)|\n|\t/s) {" "})
     end
+    doc.css("span.value").each do |item|
+      value_array.push(item.inner_html.strip.gsub('<span class="terminal">', '').gsub(/(<[^>]*>)|\n|\t/s) {" "})
+    end
+
     image = doc.at_css(".img.img-responsive.img-roundedd")["src"]
     if image.chars.take(2).join == "//"
       uri = "https:#{image}"
@@ -36,6 +42,10 @@ infotext = Array.new
       uri = "https://www.carjam.co.nz#{image}"
     else
       uri = image
+    end
+    key_array.each_with_index do |key, _|
+      next unless attributes.include? key
+      infotext.push("#{key} #{value_array[_]}")
     end
     if doc.at_css(".if-reported_stolen_location").to_s["Reported 1970-Jan-01"]
       infotext.push("Stolen: No")
