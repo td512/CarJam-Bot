@@ -17,7 +17,7 @@ def debug
 end
 Discordrb::LOGGER.mode = :silent
 # Insert your Client ID and token here
-@bot = Discordrb::Commands::CommandBot.new token: '', client_id: 000000000000000000, prefix: '!'
+@bot = Discordrb::Commands::CommandBot.new token: ENV["DISCORD_BOT_TOKEN"], client_id: ENV["DISCORD_CLIENT_ID"], prefix: ENV["DISCORD_PREFIX"]
 
 Dir["./plugins/*.rb"].each do |file|
   if ENV['DBG'] == "yes"
