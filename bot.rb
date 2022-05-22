@@ -20,12 +20,11 @@ Discordrb::LOGGER.mode = :silent
 @bot = Discordrb::Commands::CommandBot.new token: ENV["DISCORD_BOT_TOKEN"], client_id: ENV["DISCORD_CLIENT_ID"], prefix: ENV["DISCORD_PREFIX"]
 
 Dir["./plugins/*.rb"].each do |file|
-  if ENV['DBG'] == "yes"
+  if ENV['DEBUG']
     puts "#{debug}Loading plugin #{file}"
   end
   require file
 end
-parent = ENV['PARENT']
 @ownerArray = [207572307928023040]
 puts "#{info}Bot is now online. Invite URL is: #{@bot.invite_url}"
 
